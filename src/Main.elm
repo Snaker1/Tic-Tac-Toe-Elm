@@ -137,12 +137,9 @@ hasWon player board =
         filtered_lines =
             List.filter (hasLine player board) winning_lines
     in
-    case List.head filtered_lines of
-        Just line ->
-            Just (Win line player)
+    List.head filtered_lines
+        |> Maybe.map (\line -> Win line player)
 
-        Nothing ->
-            Nothing
 
 
 handleClick : Int -> Model -> Model

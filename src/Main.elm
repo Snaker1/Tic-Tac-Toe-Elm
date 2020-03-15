@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Main exposing (main)
 
 import Array exposing (..)
 import Browser
@@ -11,6 +11,7 @@ import Html.Events exposing (onClick)
 -- MAIN
 
 
+main : Program () Model Msg
 main =
     Browser.sandbox { init = init, update = update, view = view }
 
@@ -50,11 +51,13 @@ type alias Model =
 type History
     = Entry Model
 
+
 board_size : Int
 board_size =
     3
 
-winning_lines: List (Int, Int, Int)
+
+winning_lines : List ( Int, Int, Int )
 winning_lines =
     [ ( 0, 1, 2 )
     , ( 3, 4, 5 )
@@ -139,7 +142,6 @@ hasWon player board =
     in
     List.head filtered_lines
         |> Maybe.map (\line -> Win line player)
-
 
 
 handleClick : Int -> Model -> Model
@@ -233,7 +235,6 @@ viewSquare model square =
 
         squareClass =
             "square " ++ squareRowClass ++ " " ++ squareRedClass
-
 
         winningSquares =
             case model.hasWon of
